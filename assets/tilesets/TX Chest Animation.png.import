@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TX Village Props.png-97b99d512722436e7940647c635fcef6.stex"
+path="res://.import/TX Chest Animation.png-fd78329ae2752e539f831d63864d077d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TX Village Props.png"
-dest_files=[ "res://.import/TX Village Props.png-97b99d512722436e7940647c635fcef6.stex" ]
+source_file="res://assets/tilesets/TX Chest Animation.png"
+dest_files=[ "res://.import/TX Chest Animation.png-fd78329ae2752e539f831d63864d077d.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TX Chest Animation.png-34d8d4395770c22df0458b1fdfee7cd0.stex"
+path="res://.import/TX Tileset Ground.png-69edad6afe80e902faea465c64f06265.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/TX Chest Animation.png"
-dest_files=[ "res://.import/TX Chest Animation.png-34d8d4395770c22df0458b1fdfee7cd0.stex" ]
+source_file="res://assets/tilesets/TX Tileset Ground.png"
+dest_files=[ "res://.import/TX Tileset Ground.png-69edad6afe80e902faea465c64f06265.stex" ]
 
 [params]
 
