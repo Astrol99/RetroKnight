@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Medieval_Start-UpTutorial.mp3-2c98752843237d6a56d55b64f5994728.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Medieval_Start-UpTutorial.mp3"
+dest_files=[ "res://.import/Medieval_Start-UpTutorial.mp3-2c98752843237d6a56d55b64f5994728.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
