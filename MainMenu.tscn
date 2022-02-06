@@ -37,6 +37,8 @@ transform = Transform2D( 2.4, 0, 0, 2.3, 320, 180 )
 script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground"]
+position = Vector2( 2.57358, 1.77176 )
+scale = Vector2( 0.999592, 0.999592 )
 texture = ExtResource( 8 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -54,7 +56,7 @@ motion_mirroring = Vector2( 544, 0 )
 texture = ExtResource( 7 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.3, 1 )
+motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 544, 0 )
 
 [node name="FarTrees" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
