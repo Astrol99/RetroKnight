@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Jump.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Run.png" type="Texture" id=4]

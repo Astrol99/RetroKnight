@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/PixelTheme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/music/Medieval_Start-UpTutorial.mp3" type="AudioStream" id=3]
 [ext_resource path="res://assets/sprites/parallax_mountain_pack/layers/parallax-mountain-trees.png" type="Texture" id=4]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/sprites/parallax_mountain_pack/layers/parallax-mountain-montain-far.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/parallax_mountain_pack/layers/parallax-mountain-mountains.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/parallax_mountain_pack/layers/parallax-mountain-bg.png" type="Texture" id=8]
-[ext_resource path="res://ParallaxBackground.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://assets/fonts/Minecraft.ttf"
@@ -34,7 +33,6 @@ autoplay = true
 offset = Vector2( 320, 180 )
 scale = Vector2( 2.4, 2.3 )
 transform = Transform2D( 2.4, 0, 0, 2.3, 320, 180 )
-script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground"]
 position = Vector2( 2.57358, 1.77176 )
