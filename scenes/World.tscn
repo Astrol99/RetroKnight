@@ -1481,5 +1481,4 @@ position = Vector2( 334, 236 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 offset = Vector2( 0, -75 )
 current = true
-process_mode = 0
 smoothing_enabled = true
