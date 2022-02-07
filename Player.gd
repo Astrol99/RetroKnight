@@ -1,56 +1,43 @@
 extends KinematicBody2D
 
-onready var _animated_sprite = $AnimatedSprite
+onready var _sprite = $Sprite
+onready var _animation_player = $AnimationPlayer
+onready var _animation_state = $AnimationTree.get("parameters/playback")
 
-export var acceleration : float = 512.0
-export var max_speed : float = 64.0
-export var friction : float = 0.25
-export var gravity : float = 200.0
-export var jump_force : float = 128.0
+export var ACCELERATION : float = 500.0
+export var MAX_SPEED : float = 150.0
+export var FRICTION : float = 0.25
+export var GRAVITY : float = 400.0
+export var JUMP_FORCE : float = 200.0
 
-var motion : Vector2 = Vector2.ZERO
+var velocity : Vector2 = Vector2.ZERO
 
-func _physics_process(delta):
-	# Get input of left and right
+func _physics_process(delta):		
 	var x_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-
-	if Input.is_action_just_pressed("player_attack"):
-		set_anim("attack")
 	
 	# Horizontal movement
 	if x_input != 0:
-		motion.x += x_input * acceleration * delta
-		motion.x = clamp(motion.x, -max_speed, max_speed)
-		_animated_sprite.flip_h = x_input < 0
-	
-	# Gravity
-	motion.y += gravity * delta
-	
+		velocity.x += x_input * ACCELERATION * delta
+		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+		_sprite.flip_h = x_input < 0
+		
+		if is_on_floor():
+			_animation_state.travel("run")
+	else:
+		if is_on_floor():
+			_animation_state.travel("idle")
+
 	if is_on_floor():
-		# Slide friction
+		# Friction
 		if x_input == 0:	
-			motion.x = lerp(motion.x, 0, friction)
+			velocity.x = lerp(velocity.x, 0, FRICTION)
 		
 		# Jump
 		if Input.is_action_just_pressed("ui_up"):
-			motion.y = -jump_force
-	
-	motion = move_and_slide(motion, Vector2.UP)
-	
-	# Main animation
-	if is_on_floor():
-		if x_input == 0:
-			set_anim("idle")
-		else:
-			set_anim("run")
-	else:
-		if motion.y < 0:
-			set_anim("jump")
-		else:
-			set_anim("fall")
+			velocity.y = -JUMP_FORCE
+			_animation_state.travel("jump")
 
-func set_anim(anim):
-	if _animated_sprite.animation != anim:
-		_animated_sprite.play(anim)
-	else:
-		return
+	velocity.y += GRAVITY * delta
+	
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
