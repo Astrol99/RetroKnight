@@ -9,7 +9,7 @@ export var ACCELERATION : float = 500.0
 export var MAX_SPEED : float = 150.0
 export var FRICTION : float = 0.25
 export var GRAVITY : float = 400.0
-export var JUMP_FORCE : float = 200.0
+export var JUMP_FORCE : float = 220.0
 
 enum {
 	MOVE,
@@ -21,8 +21,9 @@ var velocity : Vector2 = Vector2.ZERO
 
 func _ready():
 	_animation_tree.active = true
+	_sword_hitbox.knockback_vector = Vector2.LEFT
 
-func _process(delta):
+func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
@@ -37,6 +38,7 @@ func move_state(delta):
 		velocity.x += x_input * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		_sprite.flip_h = x_input < 0
+		_sword_hitbox.knockback_vector = x_input
 		_sword_hitbox.position.x = 42 if x_input > 0 else -42
 		
 		if is_on_floor():
@@ -51,12 +53,12 @@ func move_state(delta):
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = -JUMP_FORCE
 			_animation_state.travel("jump")
+			
+		if Input.is_action_just_pressed("player_attack"):
+			state = ATTACK
 
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
-	if Input.is_action_just_pressed("player_attack"):
-		state = ATTACK
 
 func attack_state(delta):
 	velocity = Vector2.ZERO

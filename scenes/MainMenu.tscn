@@ -13,7 +13,7 @@
 font_path = "res://assets/fonts/Minecraft.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 45
+size = 34
 font_data = SubResource( 1 )
 
 [node name="MainMenu" type="Control"]
@@ -78,7 +78,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0.98291, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "THE GAME"
+text = "TALES OF RETROKNIGHT"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

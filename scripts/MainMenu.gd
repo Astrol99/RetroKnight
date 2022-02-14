@@ -10,7 +10,7 @@ func _process(delta):
 
 
 func _on_Enter_pressed():
-	get_tree().change_scene("res://scenes/World.tscn")
+	get_tree().change_scene("res://scenes/Tutorial.tscn")
 
 func _on_Quit_pressed():
 	get_tree().quit()

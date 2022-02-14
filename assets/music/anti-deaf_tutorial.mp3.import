@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/anti-deaf_tutorial.mp3-a339a69f6216aeb208f3508cd9ebf2c9.mp3str"
+
+[deps]
+
+source_file="res://assets/music/anti-deaf_tutorial.mp3"
+dest_files=[ "res://.import/anti-deaf_tutorial.mp3-a339a69f6216aeb208f3508cd9ebf2c9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
