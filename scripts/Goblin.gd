@@ -12,7 +12,8 @@ export var GRAVITY : float = 500.0
 enum {
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	HURT
 }
 var velocity : Vector2 = Vector2.ZERO
 var knockback : Vector2 = Vector2.ZERO
@@ -41,6 +42,9 @@ func _physics_process(delta):
 				state = IDLE
 			
 			_sprite.flip_h = velocity.x < 0
+		
+		HURT:
+			pass
 	
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity)
@@ -55,10 +59,14 @@ func _on_Hurtbox_area_entered(area):
 		_sprite.play("death")
 	else:
 		_sprite.play("hurt")
-	knockback.x = area.knockback_vector * 100
+		state = HURT
+	
+	knockback = area.knockback_vector * 100
 
 
 func _on_AnimatedSprite_animation_finished():
 	match _sprite.animation:
 		"death":
 			queue_free()
+		"hurt":
+			state = IDLE

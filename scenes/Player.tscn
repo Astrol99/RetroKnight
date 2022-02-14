@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" type="Texture" id=2]
@@ -305,7 +305,9 @@ graph_offset = Vector2( -373, 49 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
 [sub_resource type="RectangleShape2D" id=65]
-extents = Vector2( 15, 18.125 )
+extents = Vector2( 34.5, 18.125 )
+
+[sub_resource type="CapsuleShape2D" id=66]
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 6
@@ -342,5 +344,15 @@ collision_mask = 8
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitbox"]
+position = Vector2( -19.5, 0 )
 shape = SubResource( 65 )
 disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource( 66 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

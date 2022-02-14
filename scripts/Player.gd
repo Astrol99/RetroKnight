@@ -4,6 +4,7 @@ onready var _sprite = $Sprite
 onready var _animation_tree = $AnimationTree
 onready var _animation_state = _animation_tree.get("parameters/playback")
 onready var _sword_hitbox = $SwordHitbox
+var stats = PlayerStats
 
 export var ACCELERATION : float = 500.0
 export var MAX_SPEED : float = 150.0
@@ -19,7 +20,11 @@ enum {
 var state = MOVE
 var velocity : Vector2 = Vector2.ZERO
 
+func quit():
+	get_tree().quit()
+
 func _ready():
+	stats.connect("no_health", self, "quit")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = Vector2.LEFT
 
@@ -38,7 +43,7 @@ func move_state(delta):
 		velocity.x += x_input * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		_sprite.flip_h = x_input < 0
-		_sword_hitbox.knockback_vector = x_input
+		_sword_hitbox.knockback_vector = Vector2(x_input, 0)
 		_sword_hitbox.position.x = 42 if x_input > 0 else -42
 		
 		if is_on_floor():
@@ -67,3 +72,11 @@ func attack_state(delta):
 func attack_animation_finished():
 	state = MOVE
 	
+
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= 1
+
+
+func _on_EXITAREA_body_entered(body):
+	get_tree().quit()
