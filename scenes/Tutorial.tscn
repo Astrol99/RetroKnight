@@ -1605,6 +1605,7 @@ __meta__ = {
 [node name="DAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 136, -88 )
 frames = SubResource( 163 )
+frame = 1
 playing = true
 
 [node name="JumpTutorial" type="RichTextLabel" parent="."]
@@ -1622,7 +1623,6 @@ __meta__ = {
 [node name="WAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 512, -112 )
 frames = SubResource( 168 )
-frame = 1
 playing = true
 
 [node name="AttackTutorial" type="RichTextLabel" parent="."]
@@ -1639,11 +1639,13 @@ __meta__ = {
 [node name="M1Animation" type="AnimatedSprite" parent="."]
 position = Vector2( 896, -184 )
 frames = SubResource( 171 )
+frame = 1
 playing = true
 
 [node name="M1Animation2" type="AnimatedSprite" parent="."]
 position = Vector2( 928, -184 )
 frames = SubResource( 174 )
+frame = 1
 playing = true
 
 [node name="EXIT TEXT" type="RichTextLabel" parent="."]
