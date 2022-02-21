@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" type="Texture" id=2]
@@ -9,21 +9,6 @@
 
 [sub_resource type="CapsuleShape2D" id=41]
 height = 18.0
-
-[sub_resource type="Animation" id=64]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("../SwordHitbox:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=46]
 resource_name = "attack"
@@ -77,18 +62,6 @@ tracks/3/keys = {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("../SwordHitbox:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=47]
@@ -299,12 +272,9 @@ states/run/node = SubResource( 50 )
 states/run/position = Vector2( 583, 95 )
 transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "attack", "idle", SubResource( 62 ), "idle", "attack", SubResource( 63 ) ]
 start_node = "idle"
-graph_offset = Vector2( -373, 49 )
+graph_offset = Vector2( -511, 64 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
-
-[sub_resource type="RectangleShape2D" id=65]
-extents = Vector2( 15, 18.125 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -321,7 +291,6 @@ shape = SubResource( 41 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite")
 playback_speed = 1.5
-anims/RESET = SubResource( 64 )
 anims/attack = SubResource( 46 )
 anims/fall = SubResource( 47 )
 anims/idle = SubResource( 43 )
@@ -332,8 +301,3 @@ anims/run = SubResource( 48 )
 tree_root = SubResource( 53 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 54 )
-
-[node name="SwordHitbox" type="CollisionShape2D" parent="."]
-position = Vector2( 42, 0 )
-shape = SubResource( 65 )
-disabled = true
