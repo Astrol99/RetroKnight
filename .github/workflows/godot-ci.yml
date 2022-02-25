@@ -3,7 +3,7 @@ on: push
 
 env:
   GODOT_VERSION: 3.4.2
-  EXPORT_NAME: Tales_of_Retroknight
+  EXPORT_NAME: Tales of Retroknight
 
 jobs:
   export-web:
