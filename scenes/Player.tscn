@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Fall.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Attack.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Hitbox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Roll.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape2D" id=41]
 height = 18.0
@@ -50,13 +51,25 @@ tracks/2/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("..")
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Hitbox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
@@ -64,22 +77,10 @@ tracks/3/keys = {
 "method": "attack_animation_finished"
 } ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("../Hitbox/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
 
 [sub_resource type="Animation" id=47]
 resource_name = "fall"
-length = 0.3
+length = 0.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -120,6 +121,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=43]
 resource_name = "idle"
+length = 0.9
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -160,7 +162,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=44]
 resource_name = "jump"
-length = 0.3
+length = 0.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -199,8 +201,61 @@ tracks/2/keys = {
 "values": [ 0, 1, 2 ]
 }
 
+[sub_resource type="Animation" id=66]
+resource_name = "roll"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+
 [sub_resource type="Animation" id=48]
 resource_name = "run"
+length = 0.9
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -285,7 +340,7 @@ states/run/node = SubResource( 50 )
 states/run/position = Vector2( 583, 95 )
 transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "attack", "idle", SubResource( 62 ), "idle", "attack", SubResource( 63 ) ]
 start_node = "idle"
-graph_offset = Vector2( -511, 64 )
+graph_offset = Vector2( -529, -18 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
@@ -313,6 +368,7 @@ anims/attack = SubResource( 46 )
 anims/fall = SubResource( 47 )
 anims/idle = SubResource( 43 )
 anims/jump = SubResource( 44 )
+anims/roll = SubResource( 66 )
 anims/run = SubResource( 48 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -322,11 +378,12 @@ parameters/playback = SubResource( 54 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 7 )]
 position = Vector2( 33.5, -1.5 )
-collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 64 )
 disabled = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="Hitbox"]
