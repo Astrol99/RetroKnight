@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var _sprite = $Sprite
 onready var _animation_tree = $AnimationTree
 onready var _animation_state = _animation_tree.get("parameters/playback")
+onready var _hitbox = $Hitbox
 
 export var ACCELERATION : float = 500.0
 export var MAX_SPEED : float = 150.0
@@ -39,7 +40,14 @@ func move_state(delta):
 	if x_input != 0:
 		velocity.x += x_input * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-		_sprite.flip_h = x_input < 0
+		# Flip sprite and hitbox position
+		
+		if x_input < 0:
+			_sprite.flip_h = true
+			_hitbox.position.x = -abs(_hitbox.position.x) # Always be negative
+		else:
+			_sprite.flip_h = false
+			_hitbox.position.x = abs(_hitbox.position.x) # Always be positive
 		
 		if is_on_floor():
 			_animation_state.travel("run")
