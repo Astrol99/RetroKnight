@@ -53,6 +53,8 @@ func move_state(delta):
 		if Input.is_action_just_pressed("ui_up"):
 			velocity.y = -JUMP_FORCE
 			_animation_state.travel("jump")
+	else:
+		_animation_state.travel("fall")
 	
 	# Attack
 	if Input.is_action_just_pressed("player_attack"):
