@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var _stats = $Stats
 onready var _animated_sprite = $AnimatedSprite
 onready var _player_detection_zone = $PlayerDetectionZone
+onready var _hurtbox = $Hurtbox
 
 export var ACCELERATION = 50
 export var MAX_SPEED = 500

@@ -4,6 +4,8 @@ onready var _sprite = $Sprite
 onready var _animation_tree = $AnimationTree
 onready var _animation_state = _animation_tree.get("parameters/playback")
 onready var _sword_hitbox = $SwordHitbox
+onready var _hurtbox = $Hurtbox
+var stats = PlayerStats
 
 export(float) var ACCELERATION : float = 500.0
 export(float) var MAX_SPEED : float = 150.0
@@ -24,6 +26,7 @@ var velocity : Vector2 = Vector2.ZERO
 var roll_vector : Vector2 = Vector2.RIGHT
 
 func _ready():
+	stats.connect("no_health", self, "queue_free")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
 
@@ -94,3 +97,8 @@ func roll_state(delta):
 
 func roll_animation_finished():
 	state = MOVE
+
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= 1
+	_hurtbox.start_invincibility(0.5)
