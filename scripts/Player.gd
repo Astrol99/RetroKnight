@@ -3,14 +3,14 @@ extends KinematicBody2D
 onready var _sprite = $Sprite
 onready var _animation_tree = $AnimationTree
 onready var _animation_state = _animation_tree.get("parameters/playback")
-onready var _hitbox = $Hitbox
+onready var _sword_hitbox = $SwordHitbox
 
-const ACCELERATION : float = 500.0
-const MAX_SPEED : float = 150.0
-const FRICTION : float = 0.25
-const GRAVITY : float = 400.0
-const JUMP_FORCE : float = 200.0
-const ROLL_SPEED : float = 100.0
+export(float) var ACCELERATION : float = 500.0
+export(float) var MAX_SPEED : float = 150.0
+export(float) var FRICTION : float = 0.25
+export(float) var GRAVITY : float = 400.0
+export(float) var JUMP_FORCE : float = 200.0
+export(float) var ROLL_SPEED : float = 100.0
 
 # States
 enum {
@@ -25,6 +25,7 @@ var roll_vector : Vector2 = Vector2.RIGHT
 
 func _ready():
 	_animation_tree.active = true
+	_sword_hitbox.knockback_vector = roll_vector
 
 func _physics_process(delta):
 	match state:
@@ -44,16 +45,18 @@ func move_state(delta):
 	# Horizontal movement
 	if x_input != 0:
 		roll_vector = Vector2(x_input, 0)
+		_sword_hitbox.knockback_vector = Vector2(x_input, 0)
+		
 		velocity.x += x_input * ACCELERATION * delta
 		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 		# Flip sprite and hitbox position
 		
 		if x_input < 0:
 			_sprite.flip_h = true
-			_hitbox.position.x = -abs(_hitbox.position.x) # Always be negative
+			_sword_hitbox.position.x = -abs(_sword_hitbox.position.x) # Always be negative
 		else:
 			_sprite.flip_h = false
-			_hitbox.position.x = abs(_hitbox.position.x) # Always be positive
+			_sword_hitbox.position.x = abs(_sword_hitbox.position.x) # Always be positive
 		
 		if is_on_floor():
 			_animation_state.travel("run")
