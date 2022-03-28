@@ -18,7 +18,8 @@ export(float) var ROLL_SPEED : float = 100.0
 enum {
 	MOVE,
 	ATTACK,
-	ROLL
+	ROLL,
+	HIT
 }
 var state = MOVE
 
@@ -38,6 +39,8 @@ func _physics_process(delta):
 			attack_state(delta)
 		ROLL:
 			roll_state(delta)
+		HIT:
+			hit_state(delta)
 	
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -98,7 +101,13 @@ func roll_state(delta):
 func roll_animation_finished():
 	state = MOVE
 
-
 func _on_Hurtbox_area_entered(area):
 	stats.health -= 1
+	state = HIT
 	_hurtbox.start_invincibility(0.5)
+
+func hit_state(delta):
+	_animation_state.travel("hit")
+
+func hit_animation_finished():
+	state = MOVE

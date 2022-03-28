@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/mainlev_build.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Chest.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background3.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background4b.png" type="Texture" id=7]
 [ext_resource path="res://scenes/Flying Eye.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/HealthUI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 32, 0, 32 )
@@ -861,3 +862,9 @@ offset = Vector2( 0, -75 )
 current = true
 process_mode = 0
 smoothing_enabled = true
+
+[node name="HealthUI" parent="." instance=ExtResource( 9 )]
+margin_left = 168.0
+margin_top = 96.0
+margin_right = 224.0
+margin_bottom = 104.0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_square.png-18e9e0a9774b0a3b62518b53fb7c0730.stex"
+path="res://.import/GUI.png-020a602f77204f854765c60e6f446ed3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/white_square.png"
-dest_files=[ "res://.import/white_square.png-18e9e0a9774b0a3b62518b53fb7c0730.stex" ]
+source_file="res://assets/sprites/Pixel Art GUI Elements/GUI.png"
+dest_files=[ "res://.import/GUI.png-020a602f77204f854765c60e6f446ed3.stex" ]
 
 [params]
 

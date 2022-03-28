@@ -40,6 +40,7 @@ func _physics_process(delta):
 				state = IDLE
 	
 			_animated_sprite.flip_h = velocity.x < 0
+
 	
 	velocity = move_and_slide(velocity)
 
@@ -61,3 +62,9 @@ func _on_Stats_no_health():
 	yield(_animated_sprite, "animation_finished")
 	
 	queue_free()
+
+
+func _on_Hitbox_body_entered(body):
+	_animated_sprite.play("attack")
+	yield(_animated_sprite, "animation_finished")
+	_animated_sprite.play("flight")
