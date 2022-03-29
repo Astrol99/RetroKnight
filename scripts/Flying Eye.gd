@@ -6,6 +6,7 @@ onready var _player_detection_zone = $PlayerDetectionZone
 onready var _hurtbox = $Hurtbox
 onready var _soft_collision = $SoftCollision
 onready var _wander_controller = $WanderController
+onready var _blink_animation_player = $BlinkAnimationPlayer
 
 export var ACCELERATION = 50
 export var MAX_SPEED = 500
@@ -77,6 +78,7 @@ func _on_Hurtbox_area_entered(area):
 	_animated_sprite.play("flight")
 	
 	_stats.health -= area.damage
+	_hurtbox.start_invincibility(0.4)
 
 func _on_Stats_no_health():
 	_animated_sprite.play("death")
@@ -89,3 +91,11 @@ func _on_Hitbox_body_entered(body):
 	_animated_sprite.play("attack")
 	yield(_animated_sprite, "animation_finished")
 	_animated_sprite.play("flight")
+
+
+func _on_Hurtbox_invincibility_started():
+	_blink_animation_player.play("Start")
+
+
+func _on_Hurtbox_invincibility_ended():
+	_blink_animation_player.play("Stop")

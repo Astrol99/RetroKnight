@@ -5,6 +5,7 @@ onready var _animation_tree = $AnimationTree
 onready var _animation_state = _animation_tree.get("parameters/playback")
 onready var _sword_hitbox = $SwordHitbox
 onready var _hurtbox = $Hurtbox
+onready var _blink_animation_player = $BlinkAnimationPlayer
 var stats = PlayerStats
 
 export(float) var ACCELERATION : float = 500.0
@@ -102,12 +103,18 @@ func roll_animation_finished():
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1
+	stats.health -= area.damage
 	state = HIT
-	_hurtbox.start_invincibility(0.5)
+	_hurtbox.start_invincibility(0.6)
 
 func hit_state(delta):
 	_animation_state.travel("hit")
 
 func hit_animation_finished():
 	state = MOVE
+
+func _on_Hurtbox_invincibility_started():
+	_blink_animation_player.play("Start")
+
+func _on_Hurtbox_invincibility_ended():
+	_blink_animation_player.play("Stop")
