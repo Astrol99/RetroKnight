@@ -4,6 +4,7 @@ onready var _stats = $Stats
 onready var _animated_sprite = $AnimatedSprite
 onready var _player_detection_zone = $PlayerDetectionZone
 onready var _hurtbox = $Hurtbox
+onready var _soft_collision = $SoftCollision
 
 export var ACCELERATION = 50
 export var MAX_SPEED = 500
@@ -41,7 +42,8 @@ func _physics_process(delta):
 	
 			_animated_sprite.flip_h = velocity.x < 0
 
-	
+	if _soft_collision.is_colliding():
+		velocity += _soft_collision.get_push_vector() * delta * 400
 	velocity = move_and_slide(velocity)
 
 func seek_player():
