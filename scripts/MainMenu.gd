@@ -14,4 +14,6 @@ func _on_Enter_pressed():
 	get_tree().change_scene("res://scenes/World.tscn")
 
 func _on_Quit_pressed():
+	if OS.has_feature('JavaScript'):
+		JavaScript.eval("window.close()")
 	get_tree().quit()

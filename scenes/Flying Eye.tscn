@@ -196,7 +196,7 @@ MAX_SPEED = 200
 material = SubResource( 31 )
 frames = SubResource( 25 )
 animation = "flight"
-frame = 5
+frame = 6
 speed_scale = 2.0
 playing = true
 
