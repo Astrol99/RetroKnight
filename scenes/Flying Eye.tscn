@@ -155,7 +155,7 @@ MAX_SPEED = 200
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
 animation = "flight"
-frame = 6
+frame = 2
 speed_scale = 2.0
 playing = true
 
