@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/sprites/Monsters_Creatures_Fantasy/Flying eye/Attack.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Monsters_Creatures_Fantasy/Flying eye/Take Hit.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/PlayerDetectionZone.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/Hitbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/SoftCollision.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/WanderController.tscn" type="PackedScene" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -155,7 +156,7 @@ MAX_SPEED = 200
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
 animation = "flight"
-frame = 2
+frame = 6
 speed_scale = 2.0
 playing = true
 
@@ -194,6 +195,8 @@ shape = SubResource( 29 )
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 30 )
+
+[node name="WanderController" parent="." instance=ExtResource( 11 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]

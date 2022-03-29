@@ -3,6 +3,7 @@ extends Control
 onready var _parallax_background = $ParallaxBackground
 
 func _ready():
+	randomize()
 	$VBoxContainer/Start.grab_focus()
 
 func _process(delta):
