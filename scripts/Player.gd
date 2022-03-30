@@ -87,13 +87,13 @@ func move_state(delta):
 	if Input.is_action_just_pressed("player_attack"):
 		state = ATTACK
 
-func attack_state(delta):
+func attack_state(_delta):
 	_animation_state.travel("attack")
 
 func attack_animation_finished():
 	state = MOVE
 
-func roll_state(delta):
+func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED
 	_animation_state.travel("roll")
 	
@@ -107,7 +107,7 @@ func _on_Hurtbox_area_entered(area):
 	state = HIT
 	_hurtbox.start_invincibility(0.6)
 
-func hit_state(delta):
+func hit_state(_delta):
 	_animation_state.travel("hit")
 
 func hit_animation_finished():

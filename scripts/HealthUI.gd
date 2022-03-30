@@ -17,5 +17,7 @@ func set_max_health(value):
 func _ready():
 	self.max_health = PlayerStats.max_health
 	self.health = PlayerStats.health
-	PlayerStats.connect("health_changed", self, "set_health")
-	PlayerStats.connect("max_health_changed", self, "set_max_health")
+	if PlayerStats.connect("health_changed", self, "set_health") != OK:
+		print("An error occurred when connecting health_changed signal to set_health function")
+	if PlayerStats.connect("max_health_changed", self, "set_max_health") != OK:
+		print("An error occurred when connecting max_health_changed signal to set_max_health function")
