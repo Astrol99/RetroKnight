@@ -11,7 +11,7 @@ func _process(delta):
 
 
 func _on_Enter_pressed():
-	if get_tree().change_scene("res://scenes/World.tscn") != OK:
+	if get_tree().change_scene("res://src/World/World.tscn") != OK:
 		print("An unexpected error occured when trying to switch to the World scene")
 
 func _on_Quit_pressed():
