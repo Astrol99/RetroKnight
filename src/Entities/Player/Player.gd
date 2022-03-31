@@ -16,13 +16,13 @@ export(float) var JUMP_FORCE : float = 200.0
 export(float) var ROLL_SPEED : float = 100.0
 
 # States
-enum {
+enum States {
 	MOVE,
 	ATTACK,
 	ROLL,
 	HIT
 }
-var state = MOVE
+var state = States.MOVE
 
 var velocity : Vector2 = Vector2.ZERO
 var roll_vector : Vector2 = Vector2.RIGHT
@@ -34,13 +34,13 @@ func _ready():
 
 func _physics_process(delta):
 	match state:
-		MOVE:
+		States.MOVE:
 			move_state(delta)
-		ATTACK:
+		States.ATTACK:
 			attack_state(delta)
-		ROLL:
+		States.ROLL:
 			roll_state(delta)
-		HIT:
+		States.HIT:
 			hit_state(delta)
 	
 	velocity.y += GRAVITY * delta
@@ -79,19 +79,19 @@ func move_state(delta):
 			_animation_state.travel("jump")
 		# Roll
 		if Input.is_action_just_pressed("roll"):
-			state = ROLL
+			state = States.ROLL
 	else:
 		_animation_state.travel("fall")
 	
 	# Attack
 	if Input.is_action_just_pressed("player_attack"):
-		state = ATTACK
+		state = States.ATTACK
 
 func attack_state(_delta):
 	_animation_state.travel("attack")
 
 func attack_animation_finished():
-	state = MOVE
+	state = States.MOVE
 
 func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED
@@ -100,18 +100,18 @@ func roll_state(_delta):
 	velocity = move_and_slide(velocity)
 
 func roll_animation_finished():
-	state = MOVE
+	state = States.MOVE
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	state = HIT
+	state = States.HIT
 	_hurtbox.start_invincibility(0.6)
 
 func hit_state(_delta):
 	_animation_state.travel("hit")
 
 func hit_animation_finished():
-	state = MOVE
+	state = States.MOVE
 
 func _on_Hurtbox_invincibility_started():
 	_blink_animation_player.play("Start")
