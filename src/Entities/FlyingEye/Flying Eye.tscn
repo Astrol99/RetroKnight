@@ -18,6 +18,38 @@ resource_local_to_scene = true
 shader = ExtResource( 12 )
 shader_param/active = false
 
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 450, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 600, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 750, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 900, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 1050, 0, 150, 150 )
+
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 150, 150 )
@@ -82,40 +114,13 @@ region = Rect2( 900, 0, 150, 150 )
 atlas = ExtResource( 3 )
 region = Rect2( 1050, 0, 150, 150 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 450, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 600, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 750, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 900, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 1050, 0, 150, 150 )
-
 [sub_resource type="SpriteFrames" id=25]
 animations = [ {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": false,
+"name": "attack",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": false,
 "name": "takehit",
@@ -129,11 +134,6 @@ animations = [ {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "flight",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
-"loop": false,
-"name": "attack",
 "speed": 5.0
 } ]
 
@@ -196,7 +196,7 @@ MAX_SPEED = 200
 material = SubResource( 31 )
 frames = SubResource( 25 )
 animation = "flight"
-frame = 6
+frame = 1
 speed_scale = 2.0
 playing = true
 

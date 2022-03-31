@@ -17,13 +17,10 @@ enum States {
 	WANDER,
 	CHASE
 }
-var state = States.CHASE
+onready var state = pick_rand_state([States.IDLE, States.WANDER])
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
-
-func _ready():
-	state = pick_rand_state(States)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -59,15 +56,16 @@ func accelerate_towards_point(delta, point):
 	_animated_sprite.flip_h = velocity.x < 0
 
 func update_wander():
-	state = pick_rand_state(States)
+	state = pick_rand_state([States.IDLE, States.WANDER])
 	_wander_controller.start_wander_timer(rand_range(1,3))
 
 func seek_player():
 	if _player_detection_zone.player:
 		state = States.CHASE
 
-func pick_rand_state(state_list: Dictionary):
-	return state_list.keys()[randi() % state_list.size()]
+func pick_rand_state(state_list: Array):
+	return state_list[randi() % state_list.size()]
+	#return state_list.keys()[randi() % state_list.size()]
 
 func _on_Hurtbox_area_entered(area):
 	knockback = area.knockback_vector * 100
