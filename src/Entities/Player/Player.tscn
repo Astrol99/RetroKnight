@@ -22,7 +22,7 @@ shader_param/active = false
 height = 18.0
 
 [sub_resource type="Animation" id=46]
-resource_name = "attack"
+resource_name = "attack1"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -83,7 +83,7 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "attack_animation_finished"
+"method": "attack1_animation_finished"
 } ]
 }
 
@@ -410,7 +410,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="AnimationNodeAnimation" id=61]
-animation = "attack"
+animation = "attack1"
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "fall"
@@ -465,8 +465,8 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=80]
 
 [sub_resource type="AnimationNodeStateMachine" id=53]
-states/attack/node = SubResource( 61 )
-states/attack/position = Vector2( 204, 95 )
+states/ATTACK1/node = SubResource( 61 )
+states/ATTACK1/position = Vector2( 92, 95 )
 states/fall/node = SubResource( 55 )
 states/fall/position = Vector2( 390, 210 )
 states/hit/node = SubResource( 74 )
@@ -479,9 +479,9 @@ states/roll/node = SubResource( 67 )
 states/roll/position = Vector2( 390, -26 )
 states/run/node = SubResource( 50 )
 states/run/position = Vector2( 583, 95 )
-transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "attack", "idle", SubResource( 62 ), "idle", "attack", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "attack", "hit", SubResource( 80 ) ]
+transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "ATTACK1", "idle", SubResource( 62 ), "idle", "ATTACK1", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "ATTACK1", "hit", SubResource( 80 ) ]
 start_node = "idle"
-graph_offset = Vector2( -542, -2 )
+graph_offset = Vector2( -416, -44 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
@@ -531,7 +531,9 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 81 )
 position = Vector2( 0, -20 )
-texture = ExtResource( 11 )
+texture = ExtResource( 2 )
+hframes = 10
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )
@@ -540,7 +542,7 @@ shape = SubResource( 41 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite")
 playback_speed = 1.5
-anims/attack = SubResource( 46 )
+anims/attack1 = SubResource( 46 )
 anims/death = SubResource( 73 )
 anims/fall = SubResource( 47 )
 anims/hit = SubResource( 71 )
@@ -552,6 +554,7 @@ anims/run = SubResource( 48 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 53 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 54 )
 
 [node name="SwordHitbox" parent="." instance=ExtResource( 7 )]
