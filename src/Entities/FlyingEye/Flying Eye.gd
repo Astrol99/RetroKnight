@@ -6,7 +6,6 @@ onready var _player_detection_zone = $PlayerDetectionZone
 onready var _hurtbox = $Hurtbox
 onready var _soft_collision = $SoftCollision
 onready var _wander_controller = $WanderController
-onready var _blink_animation_player = $BlinkAnimationPlayer
 
 export var ACCELERATION = 50
 export var MAX_SPEED = 500
@@ -15,7 +14,10 @@ export var FRICTION = 200
 enum States {
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	TAKEHIT,
+	DEATH,
+	ATTACK
 }
 onready var state = pick_rand_state([States.IDLE, States.WANDER])
 
@@ -25,14 +27,20 @@ var knockback = Vector2.ZERO
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
-	
+
 	match state:
 		States.IDLE:
+			if _animated_sprite.get_animation() != "flight":
+				_animated_sprite.play("flight")
+			
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
 			if _wander_controller.get_time_left() == 0:
 				update_wander()
 		States.WANDER:
+			if _animated_sprite.get_animation() != "flight":
+				_animated_sprite.play("flight")
+				
 			seek_player()
 			if _wander_controller.get_time_left() == 0:
 				update_wander()
@@ -40,11 +48,23 @@ func _physics_process(delta):
 			if global_position.distance_to(_wander_controller.target_position) <= MAX_SPEED * delta:
 				update_wander()
 		States.CHASE:
+			if _animated_sprite.get_animation() != "flight":
+				_animated_sprite.play("flight")
+				
 			var player = _player_detection_zone.player
 			if player:
 				accelerate_towards_point(delta, player.global_position)
 			else:
 				state = States.IDLE
+		States.ATTACK:
+			if _animated_sprite.get_animation() != "attack":
+				_animated_sprite.play("attack")
+		States.TAKEHIT:
+			if _animated_sprite.get_animation() != "takehit":
+				_animated_sprite.play("takehit")
+		States.DEATH:
+			if _animated_sprite.get_animation() != "death":
+				_animated_sprite.play("death")
 
 	if _soft_collision.is_colliding():
 		velocity += _soft_collision.get_push_vector() * delta * 400
@@ -65,34 +85,25 @@ func seek_player():
 
 func pick_rand_state(state_list: Array):
 	return state_list[randi() % state_list.size()]
-	#return state_list.keys()[randi() % state_list.size()]
 
 func _on_Hurtbox_area_entered(area):
+	state = States.TAKEHIT
+	
 	knockback = area.knockback_vector * 100
-	
-	_animated_sprite.play("takehit")
-	yield(_animated_sprite, "animation_finished")
-	_animated_sprite.play("flight")
-	
 	_stats.health -= area.damage
 	_hurtbox.start_invincibility(0.4)
 
 func _on_Stats_no_health():
-	_animated_sprite.play("death")
-	yield(_animated_sprite, "animation_finished")
-	
-	queue_free()
-
+	state = States.DEATH
 
 func _on_Hitbox_body_entered(_body):
-	_animated_sprite.play("attack")
-	yield(_animated_sprite, "animation_finished")
-	_animated_sprite.play("flight")
+	state = States.ATTACK
 
-
-func _on_Hurtbox_invincibility_started():
-	_blink_animation_player.play("Start")
-
-
-func _on_Hurtbox_invincibility_ended():
-	_blink_animation_player.play("Stop")
+func _on_AnimatedSprite_animation_finished():
+	match _animated_sprite.get_animation():
+		"attack":
+			state = States.IDLE
+		"takehit":
+			state = States.IDLE
+		"death":
+			queue_free()
