@@ -20,15 +20,21 @@ enum States {
 	MOVE,
 	ATTACK1,
 	ROLL,
-	HIT
+	HIT,
+	DEATH
 }
-var state = States.MOVE
+export var state = States.MOVE
 
 var velocity : Vector2 = Vector2.ZERO
 var roll_vector : Vector2 = Vector2.RIGHT
 
+func _on_Stats_no_health():
+	velocity = Vector2.ZERO
+	_hurtbox._on_Hurtbox_invincibility_started()
+	state = States.DEATH
+
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "_on_Stats_no_health")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
 
@@ -37,11 +43,18 @@ func _physics_process(delta):
 		States.MOVE:
 			move_state(delta)
 		States.ATTACK1:
-			ATTACK1_state(delta)
+			_animation_state.travel("ATTACK1")
+			
 		States.ROLL:
-			roll_state(delta)
+			velocity = roll_vector * ROLL_SPEED
+			_animation_state.travel("roll")
+			velocity = move_and_slide(velocity)
+			
 		States.HIT:
-			hit_state(delta)
+			_animation_state.travel("hit")
+			
+		States.DEATH:
+			_animation_state.travel("death")
 	
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
@@ -87,31 +100,11 @@ func move_state(delta):
 	if Input.is_action_just_pressed("player_attack"):
 		state = States.ATTACK1
 
-func ATTACK1_state(_delta):
-	_animation_state.travel("ATTACK1")
-
-func attack1_animation_finished():
-	state = States.MOVE
-
-func roll_state(_delta):
-	velocity = roll_vector * ROLL_SPEED
-	_animation_state.travel("roll")
-	
-	velocity = move_and_slide(velocity)
-
-func roll_animation_finished():
-	state = States.MOVE
-
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
+	velocity = Vector2.ZERO
 	state = States.HIT
 	_hurtbox.start_invincibility(0.6)
-
-func hit_state(_delta):
-	_animation_state.travel("hit")
-
-func hit_animation_finished():
-	state = States.MOVE
 
 func _on_Hurtbox_invincibility_started():
 	_blink_animation_player.play("Start")

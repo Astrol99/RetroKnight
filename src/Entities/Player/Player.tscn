@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/Entities/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/FreeKnight_v1/Colour1/Outline/120x80_PNGSheets/_Idle.png" type="Texture" id=2]
@@ -72,8 +72,8 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("..")
+tracks/4/type = "value"
+tracks/4/path = NodePath("..:state")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -81,10 +81,8 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "attack1_animation_finished"
-} ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=73]
@@ -206,8 +204,8 @@ tracks/2/keys = {
 "update": 1,
 "values": [ 0 ]
 }
-tracks/3/type = "method"
-tracks/3/path = NodePath("..")
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:state")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -215,10 +213,8 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "hit_animation_finished"
-} ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=43]
@@ -354,8 +350,8 @@ tracks/3/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("..")
+tracks/4/type = "value"
+tracks/4/path = NodePath("..:state")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -363,10 +359,8 @@ tracks/4/enabled = true
 tracks/4/keys = {
 "times": PoolRealArray( 0.6 ),
 "transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "roll_animation_finished"
-} ]
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=48]
@@ -411,6 +405,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationNodeAnimation" id=61]
 animation = "attack1"
+
+[sub_resource type="AnimationNodeAnimation" id=84]
+animation = "death"
 
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "fall"
@@ -464,24 +461,41 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=80]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=89]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=90]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
 [sub_resource type="AnimationNodeStateMachine" id=53]
 states/ATTACK1/node = SubResource( 61 )
-states/ATTACK1/position = Vector2( 92, 95 )
+states/ATTACK1/position = Vector2( -381, -48 )
+states/death/node = SubResource( 84 )
+states/death/position = Vector2( 136, 623 )
 states/fall/node = SubResource( 55 )
-states/fall/position = Vector2( 390, 210 )
+states/fall/position = Vector2( 404, 259 )
 states/hit/node = SubResource( 74 )
-states/hit/position = Vector2( 34, 198 )
+states/hit/position = Vector2( -389, 526 )
 states/idle/node = SubResource( 49 )
-states/idle/position = Vector2( 390, 95 )
+states/idle/position = Vector2( 251, 76 )
 states/jump/node = SubResource( 56 )
-states/jump/position = Vector2( 578, 210 )
+states/jump/position = Vector2( 978, 475 )
 states/roll/node = SubResource( 67 )
-states/roll/position = Vector2( 390, -26 )
+states/roll/position = Vector2( 22, -326 )
 states/run/node = SubResource( 50 )
-states/run/position = Vector2( 583, 95 )
-transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "ATTACK1", "idle", SubResource( 62 ), "idle", "ATTACK1", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "ATTACK1", "hit", SubResource( 80 ) ]
+states/run/position = Vector2( 848, -75 )
+transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "ATTACK1", "idle", SubResource( 62 ), "idle", "ATTACK1", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "ATTACK1", "hit", SubResource( 80 ), "hit", "death", SubResource( 85 ), "ATTACK1", "death", SubResource( 86 ), "roll", "death", SubResource( 87 ), "idle", "death", SubResource( 88 ), "run", "death", SubResource( 89 ), "jump", "death", SubResource( 90 ), "fall", "death", SubResource( 91 ) ]
 start_node = "idle"
-graph_offset = Vector2( -416, -44 )
+end_node = "death"
+graph_offset = Vector2( -733, -478 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
@@ -531,8 +545,9 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 81 )
 position = Vector2( 0, -20 )
-texture = ExtResource( 2 )
-hframes = 10
+texture = ExtResource( 3 )
+hframes = 3
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )
@@ -553,7 +568,6 @@ anims/run = SubResource( 48 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 53 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 54 )
 
 [node name="SwordHitbox" parent="." instance=ExtResource( 7 )]

@@ -99,10 +99,6 @@ func _on_Stats_no_health():
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
-func _on_Hitbox_area_entered(area):
-	velocity = Vector2.ZERO
-	state = States.ATTACK
-
 func _on_AnimatedSprite_animation_finished():
 	match _animated_sprite.get_animation():
 		"attack":
@@ -111,3 +107,8 @@ func _on_AnimatedSprite_animation_finished():
 			state = States.IDLE
 		"death":
 			queue_free()
+
+
+func _on_Hitbox_area_entered(_area):
+	velocity = Vector2.ZERO
+	state = States.ATTACK
