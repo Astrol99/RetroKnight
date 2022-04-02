@@ -51,7 +51,7 @@ func _physics_process(delta):
 		States.CHASE:
 			if _animated_sprite.get_animation() != "flight":
 				_animated_sprite.play("flight")
-				
+			
 			var player = _player_detection_zone.player
 			if player:
 				accelerate_towards_point(delta, player.global_position)
@@ -99,7 +99,8 @@ func _on_Stats_no_health():
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
-func _on_Hitbox_body_entered(_body):
+func _on_Hitbox_area_entered(area):
+	velocity = Vector2.ZERO
 	state = States.ATTACK
 
 func _on_AnimatedSprite_animation_finished():
