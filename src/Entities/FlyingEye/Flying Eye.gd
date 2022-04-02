@@ -10,6 +10,7 @@ onready var _wander_controller = $WanderController
 export var ACCELERATION = 50
 export var MAX_SPEED = 500
 export var FRICTION = 200
+export var GRAVITY = 400
 
 enum States {
 	IDLE,
@@ -65,6 +66,7 @@ func _physics_process(delta):
 		States.DEATH:
 			if _animated_sprite.get_animation() != "death":
 				_animated_sprite.play("death")
+			velocity.y += GRAVITY * delta
 
 	if _soft_collision.is_colliding():
 		velocity += _soft_collision.get_push_vector() * delta * 400
@@ -94,6 +96,7 @@ func _on_Hurtbox_area_entered(area):
 	_hurtbox.start_invincibility(0.4)
 
 func _on_Stats_no_health():
+	velocity = Vector2.ZERO
 	state = States.DEATH
 
 func _on_Hitbox_body_entered(_body):
