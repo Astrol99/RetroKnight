@@ -403,6 +403,39 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 }
 
+[sub_resource type="Animation" id=82]
+resource_name = "Start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "Stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=61]
 animation = "attack1"
 
@@ -479,7 +512,7 @@ auto_advance = true
 states/ATTACK1/node = SubResource( 61 )
 states/ATTACK1/position = Vector2( -381, -48 )
 states/death/node = SubResource( 84 )
-states/death/position = Vector2( 136, 623 )
+states/death/position = Vector2( 115, 629 )
 states/fall/node = SubResource( 55 )
 states/fall/position = Vector2( 404, 259 )
 states/hit/node = SubResource( 74 )
@@ -495,7 +528,7 @@ states/run/position = Vector2( 848, -75 )
 transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "ATTACK1", "idle", SubResource( 62 ), "idle", "ATTACK1", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "ATTACK1", "hit", SubResource( 80 ), "hit", "death", SubResource( 85 ), "ATTACK1", "death", SubResource( 86 ), "roll", "death", SubResource( 87 ), "idle", "death", SubResource( 88 ), "run", "death", SubResource( 89 ), "jump", "death", SubResource( 90 ), "fall", "death", SubResource( 91 ) ]
 start_node = "idle"
 end_node = "death"
-graph_offset = Vector2( -733, -478 )
+graph_offset = Vector2( -665, -368 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
@@ -505,39 +538,6 @@ extents = Vector2( 23.5, 21.5 )
 [sub_resource type="CapsuleShape2D" id=70]
 radius = 11.0
 
-[sub_resource type="Animation" id=82]
-resource_name = "Start"
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=83]
-resource_name = "Stop"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -545,9 +545,9 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 81 )
 position = Vector2( 0, -20 )
-texture = ExtResource( 6 )
-hframes = 4
-frame = 3
+texture = ExtResource( 12 )
+hframes = 10
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )
@@ -564,6 +564,10 @@ anims/idle = SubResource( 43 )
 anims/jump = SubResource( 44 )
 anims/roll = SubResource( 66 )
 anims/run = SubResource( 48 )
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = SubResource( 82 )
+anims/Stop = SubResource( 83 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 53 )
@@ -585,10 +589,6 @@ collision_mask = 16
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 70 )
-
-[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 82 )
-anims/Stop = SubResource( 83 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

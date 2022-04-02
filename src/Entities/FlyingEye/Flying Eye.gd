@@ -33,21 +33,26 @@ func _physics_process(delta):
 		States.IDLE:
 			if _animated_sprite.get_animation() != "flight":
 				_animated_sprite.play("flight")
+			seek_player()
 			
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			seek_player()
+			
 			if _wander_controller.get_time_left() == 0:
 				update_wander()
+				
 		States.WANDER:
 			if _animated_sprite.get_animation() != "flight":
 				_animated_sprite.play("flight")
-				
 			seek_player()
+			
 			if _wander_controller.get_time_left() == 0:
 				update_wander()
+				
 			accelerate_towards_point(delta, _wander_controller.target_position)
+			
 			if global_position.distance_to(_wander_controller.target_position) <= MAX_SPEED * delta:
 				update_wander()
+				
 		States.CHASE:
 			if _animated_sprite.get_animation() != "flight":
 				_animated_sprite.play("flight")
@@ -57,6 +62,7 @@ func _physics_process(delta):
 				accelerate_towards_point(delta, player.global_position)
 			else:
 				state = States.IDLE
+				
 		States.ATTACK:
 			if _animated_sprite.get_animation() != "attack":
 				_animated_sprite.play("attack")
@@ -95,6 +101,10 @@ func _on_Hurtbox_area_entered(area):
 	_stats.health -= area.damage
 	_hurtbox.start_invincibility(0.4)
 
+func _on_Hitbox_area_entered(_area):
+	velocity = Vector2.ZERO
+	state = States.ATTACK
+
 func _on_Stats_no_health():
 	velocity = Vector2.ZERO
 	state = States.DEATH
@@ -107,8 +117,3 @@ func _on_AnimatedSprite_animation_finished():
 			state = States.IDLE
 		"death":
 			queue_free()
-
-
-func _on_Hitbox_area_entered(_area):
-	velocity = Vector2.ZERO
-	state = States.ATTACK
