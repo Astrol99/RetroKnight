@@ -4,8 +4,12 @@ export var max_health = 1 setget set_max_health
 var health = max_health setget set_health
 
 signal no_health
-signal health_changed(value)
+signal health_increased(value)
+signal health_decreased(value)
 signal max_health_changed(value)
+
+func _ready():
+	self.health = max_health
 
 func set_max_health(value):
 	max_health = value
@@ -14,9 +18,10 @@ func set_max_health(value):
 
 func set_health(value):
 	health = value
-	emit_signal("health_changed", health)
+	
 	if health <= 0:
 		emit_signal("no_health")
-
-func _ready():
-	self.health = max_health
+	elif value < 0:
+		emit_signal("health_decreased")
+	elif value > 0:
+		emit_signal("health_increased")

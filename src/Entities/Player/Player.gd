@@ -29,7 +29,8 @@ var velocity : Vector2 = Vector2.ZERO
 var roll_vector : Vector2 = Vector2.RIGHT
 
 func _ready():
-	#stats.connect("no_health", self, "_on_Stats_no_health")
+	stats.connect("no_health", self, "_on_Stats_no_health")
+	stats.connect("health_decreased", self, "on_Stats_health_decrease")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
 
@@ -100,18 +101,13 @@ func _on_Hurtbox_area_entered(area):
 	velocity = Vector2.ZERO
 	_hurtbox.start_invincibility(0.6)
 	stats.health -= area.damage
-	if stats.health <= 0:
-		state = States.DEATH
-	else:
-		state = States.HIT
 
-"""
+func on_Stats_health_decrease():
+	state = States.HIT
+
 func _on_Stats_no_health():
 	velocity = Vector2.ZERO
-	_hurtbox.set_deferred("disabled", true)
-	_animation_state.stop()
-	_animation_state.travel("death")
-"""
+	state = States.DEATH
 
 func _on_Hurtbox_invincibility_started():
 	_blink_animation_player.play("Start")
