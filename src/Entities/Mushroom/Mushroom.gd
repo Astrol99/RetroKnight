@@ -5,6 +5,8 @@ onready var _sprite = $Sprite
 onready var _animation_player = $AnimationPlayer
 onready var _player_detection_zone = $PlayerDetectionZone
 onready var _hurtbox = $Hurtbox
+onready var _hitbox = $Hitbox
+onready var _hitbox_range = $HitboxRange
 onready var _soft_collision = $SoftCollision
 onready var _wander_controller = $WanderController
 
@@ -83,7 +85,14 @@ func _physics_process(delta):
 func accelerate_towards_point(delta, point):
 	var direction = position.direction_to(point)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-	_sprite.flip_h = velocity.x < 0
+	if velocity.x < 0:
+		_sprite.flip_h = true
+		_hitbox.rotation_degrees = 180
+		_hitbox_range.rotation_degrees = 180
+	else:
+		_sprite.flip_h = false
+		_hitbox.rotation_degrees = 0
+		_hitbox_range.rotation_degrees = 0
 
 func update_wander():
 	state = pick_rand_state([States.IDLE, States.WANDER])

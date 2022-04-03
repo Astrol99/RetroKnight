@@ -236,7 +236,7 @@ height = 14.0
 
 [sub_resource type="CapsuleShape2D" id=65]
 radius = 9.0
-height = 44.0
+height = 26.0
 
 [sub_resource type="CircleShape2D" id=28]
 radius = 85.0235
@@ -251,6 +251,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 8
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 60 )
@@ -277,7 +278,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 0, 13 )
+position = Vector2( 11, 0 )
 rotation = 1.5708
 shape = SubResource( 65 )
 disabled = true
@@ -289,7 +290,7 @@ monitorable = false
 
 [node name="CollisionShape2D" parent="HitboxRange" index="0"]
 modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 0, 13 )
+position = Vector2( 11, 0 )
 rotation = 1.5708
 shape = SubResource( 65 )
 
