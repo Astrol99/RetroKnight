@@ -21,7 +21,8 @@ enum States {
 	CHASE,
 	TAKEHIT,
 	DEATH,
-	ATTACK
+	ATTACK,
+	SHIELD
 }
 onready var state = pick_rand_state([States.IDLE, States.WANDER])
 
@@ -69,6 +70,11 @@ func _physics_process(delta):
 		States.ATTACK:
 			if _animation_player.current_animation != "attack":
 				_animation_player.play("attack")
+				
+		States.SHIELD:
+			if _animation_player.current_animation != "shield":
+				_animation_player.play("shield")
+				
 		States.TAKEHIT:
 			if _animation_player.current_animation != "takehit":
 				_animation_player.play("takehit")
@@ -106,10 +112,19 @@ func pick_rand_state(state_list: Array):
 	return state_list[randi() % state_list.size()]
 
 func _on_Hurtbox_area_entered(area):
-	state = States.TAKEHIT
 	
-	knockback = area.knockback_vector * 100
-	_stats.health -= area.damage
+	# Only hurt skeleton while it is in attack state/animation
+	if state == States.ATTACK:
+		state = States.TAKEHIT
+		_stats.health -= area.damage
+		knockback = area.knockback_vector * 100
+		
+	# Skeleton special move: SHIELD to any attack besides being in attack state
+	else:
+		state = States.SHIELD
+		velocity = Vector2.ZERO
+		knockback = area.knockback_vector * 50
+		
 	_hurtbox.start_invincibility(0.4)
 
 func _on_HitboxRange_area_entered(_area):
@@ -125,6 +140,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"attack":
 			state = States.IDLE
 		"takehit":
+			state = States.IDLE
+		"shield":
 			state = States.IDLE
 		"death":
 			queue_free()
