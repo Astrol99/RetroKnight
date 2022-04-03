@@ -16,7 +16,8 @@ func show_death(_value):
 	_animation_player.play("show_death")
 
 func _on_Try_Again_pressed():
-	get_tree().reload_current_scene()
+	if get_tree().reload_current_scene() != OK:
+		print("An exception occurred in reloading the current scene")
 	
 
 func _on_Quit_pressed():
