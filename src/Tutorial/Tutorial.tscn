@@ -850,6 +850,21 @@ tile_data = PoolIntArray( 983082, 53, 0, 983083, 53, 0, 1048619, 53, 0, 1048620,
 [node name="Flying Eye" parent="." instance=ExtResource( 7 )]
 position = Vector2( 390, 313 )
 
+[node name="Flying Eye2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 489, 242 )
+
+[node name="Flying Eye3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 307, 258 )
+
+[node name="Flying Eye4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 318, 314 )
+
+[node name="Flying Eye5" parent="." instance=ExtResource( 7 )]
+position = Vector2( 385, 259 )
+
+[node name="Flying Eye6" parent="." instance=ExtResource( 7 )]
+position = Vector2( 428, 275 )
+
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 451, 317 )
 

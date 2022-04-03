@@ -19,6 +19,7 @@ export(float) var ROLL_SPEED : float = 100.0
 enum States {
 	MOVE,
 	ATTACK1,
+	ATTACK2,
 	ROLL,
 	HIT,
 	DEATH
@@ -36,10 +37,17 @@ func _ready():
 
 func _physics_process(delta):
 	match state:
+		States.ATTACK2:
+			_animation_state.travel("attack2")
+			
+		States.ATTACK1:
+			_animation_state.travel("attack1")
+			if Input.is_action_just_pressed("player_attack"):
+				_animation_state.travel("attack2")
+				state = States.ATTACK2
+			
 		States.MOVE:
 			move_state(delta)
-		States.ATTACK1:
-			_animation_state.travel("ATTACK1")
 			
 		States.ROLL:
 			velocity = roll_vector * ROLL_SPEED
