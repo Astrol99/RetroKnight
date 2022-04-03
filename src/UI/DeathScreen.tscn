@@ -7,10 +7,10 @@
 bg_color = Color( 0.6, 0.6, 0.6, 0 )
 shadow_size = 16
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("YOU DIED:modulate")
+tracks/0/path = NodePath("Quit:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,6 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "show_death"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("YOU DIED:modulate")
 tracks/0/interp = 1
@@ -31,10 +32,58 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.3, 0.8 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Try Again:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.3, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Quit:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Try Again:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Quit:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [node name="DeathScreen" type="CanvasLayer"]
@@ -58,6 +107,29 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Try Again" type="Button" parent="."]
+margin_left = 204.0
+margin_top = 234.0
+margin_right = 284.0
+margin_bottom = 268.0
+focus_neighbour_left = NodePath("../Quit")
+focus_neighbour_right = NodePath("../Quit")
+theme = ExtResource( 1 )
+text = "Try Again"
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 236.0
+margin_right = 424.0
+margin_bottom = 270.0
+focus_neighbour_left = NodePath("../Try Again")
+focus_neighbour_right = NodePath("../Try Again")
+theme = ExtResource( 1 )
+text = "Quit"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
+anims/RESET = SubResource( 4 )
 anims/show_death = SubResource( 3 )
+
+[connection signal="pressed" from="Try Again" to="." method="_on_Try_Again_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

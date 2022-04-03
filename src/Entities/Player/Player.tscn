@@ -18,9 +18,6 @@
 shader = ExtResource( 13 )
 shader_param/active = false
 
-[sub_resource type="StreamTexture" id=96]
-load_path = "res://.import/_Attack2.png-44342f5b1cfa84eae31efcde4ce104f0.stex"
-
 [sub_resource type="CapsuleShape2D" id=41]
 height = 18.0
 
@@ -93,6 +90,9 @@ tracks/4/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+
+[sub_resource type="StreamTexture" id=96]
+load_path = "res://.import/_Attack2.png-44342f5b1cfa84eae31efcde4ce104f0.stex"
 
 [sub_resource type="Animation" id=46]
 resource_name = "attack2"
@@ -621,8 +621,8 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 81 )
 position = Vector2( 0, -20 )
-texture = SubResource( 96 )
-hframes = 6
+texture = ExtResource( 2 )
+hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, 1 )

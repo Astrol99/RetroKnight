@@ -85,9 +85,6 @@ margin_top = -18.0
 margin_bottom = 18.0
 theme = ExtResource( 9 )
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 margin_right = 640.0

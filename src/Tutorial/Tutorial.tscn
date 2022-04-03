@@ -867,13 +867,13 @@ position = Vector2( 385, 259 )
 position = Vector2( 428, 275 )
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 451, 317 )
+position = Vector2( 456, 331 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 451, 317 )
+position = Vector2( 456, 331 )
 offset = Vector2( 0, -75 )
 current = true
 process_mode = 0

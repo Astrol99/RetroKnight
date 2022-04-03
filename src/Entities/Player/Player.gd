@@ -34,6 +34,7 @@ func _ready():
 	stats.connect("health_decreased", self, "_on_Stats_health_decrease")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
+	stats._ready()
 
 func _physics_process(delta):
 	match state:
