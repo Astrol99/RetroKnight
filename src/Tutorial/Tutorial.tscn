@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background3.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background2.png" type="Texture" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background4b.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/mainlev_build.png" type="Texture" id=5]
 [ext_resource path="res://src/UI/PlayerHUD.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Entities/Goblin/Goblin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Entities/FlyingEye/Flying Eye.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/Entities/Player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/DeathScreen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Entities/Goblin/Goblin.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 32, 0, 32 )
@@ -854,8 +855,11 @@ position = Vector2( 667, 329 )
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
-[node name="Goblin" parent="." instance=ExtResource( 7 )]
-position = Vector2( 490, 321 )
+[node name="Flying Eye" parent="." instance=ExtResource( 7 )]
+position = Vector2( 841, 256 )
+
+[node name="Goblin" parent="." instance=ExtResource( 10 )]
+position = Vector2( 141, 324 )
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 

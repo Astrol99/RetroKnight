@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 onready var _stats = $Stats
-onready var _animated_sprite = $AnimatedSprite
+onready var _sprite = $Sprite
+onready var _animation_player = $AnimationPlayer
 onready var _player_detection_zone = $PlayerDetectionZone
 onready var _hurtbox = $Hurtbox
 onready var _soft_collision = $SoftCollision
@@ -31,8 +32,8 @@ func _physics_process(delta):
 
 	match state:
 		States.IDLE:
-			if _animated_sprite.get_animation() != "flight":
-				_animated_sprite.play("flight")
+			if _animation_player.current_animation != "flight":
+				_animation_player.play("flight")
 			seek_player()
 			
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -41,8 +42,8 @@ func _physics_process(delta):
 				update_wander()
 				
 		States.WANDER:
-			if _animated_sprite.get_animation() != "flight":
-				_animated_sprite.play("flight")
+			if _animation_player.current_animation != "flight":
+				_animation_player.play("flight")
 			seek_player()
 			
 			if _wander_controller.get_time_left() == 0:
@@ -54,8 +55,8 @@ func _physics_process(delta):
 				update_wander()
 				
 		States.CHASE:
-			if _animated_sprite.get_animation() != "flight":
-				_animated_sprite.play("flight")
+			if _animation_player.current_animation != "flight":
+				_animation_player.play("flight")
 			
 			var player = _player_detection_zone.player
 			if player:
@@ -64,14 +65,14 @@ func _physics_process(delta):
 				state = States.IDLE
 				
 		States.ATTACK:
-			if _animated_sprite.get_animation() != "attack":
-				_animated_sprite.play("attack")
+			if _animation_player.current_animation != "attack":
+				_animation_player.play("attack")
 		States.TAKEHIT:
-			if _animated_sprite.get_animation() != "takehit":
-				_animated_sprite.play("takehit")
+			if _animation_player.current_animation != "takehit":
+				_animation_player.play("takehit")
 		States.DEATH:
-			if _animated_sprite.get_animation() != "death":
-				_animated_sprite.play("death")
+			if _animation_player.current_animation != "death":
+				_animation_player.play("death")
 			velocity.y += GRAVITY * delta
 
 	if _soft_collision.is_colliding():
@@ -81,7 +82,7 @@ func _physics_process(delta):
 func accelerate_towards_point(delta, point):
 	var direction = position.direction_to(point)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-	_animated_sprite.flip_h = velocity.x < 0
+	_sprite.flip_h = velocity.x < 0
 
 func update_wander():
 	state = pick_rand_state([States.IDLE, States.WANDER])
@@ -109,11 +110,11 @@ func _on_Stats_no_health(_value):
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
-func _on_AnimatedSprite_animation_finished():
-	match _animated_sprite.get_animation():
-		"attack":
-			state = States.IDLE
-		"takehit":
-			state = States.IDLE
-		"death":
-			queue_free()
+func _on_AnimationPlayer_animation_finished(anim_name):
+		match anim_name:
+			"attack":
+				state = States.IDLE
+			"takehit":
+				state = States.IDLE
+			"death":
+				queue_free()
