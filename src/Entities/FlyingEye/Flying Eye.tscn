@@ -28,6 +28,38 @@ region = Rect2( 300, 0, 150, 150 )
 atlas = ExtResource( 4 )
 region = Rect2( 450, 0, 150, 150 )
 
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 1 )
+region = Rect2( 150, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 1 )
+region = Rect2( 300, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 1 )
+region = Rect2( 450, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 1 )
+region = Rect2( 600, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 750, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 900, 0, 150, 150 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 1050, 0, 150, 150 )
+
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 150, 150 )
@@ -76,44 +108,17 @@ region = Rect2( 300, 0, 150, 150 )
 atlas = ExtResource( 2 )
 region = Rect2( 450, 0, 150, 150 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
-region = Rect2( 150, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 1 )
-region = Rect2( 300, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 1 )
-region = Rect2( 450, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 1 )
-region = Rect2( 600, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 1 )
-region = Rect2( 750, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 1 )
-region = Rect2( 900, 0, 150, 150 )
-
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 1 )
-region = Rect2( 1050, 0, 150, 150 )
-
 [sub_resource type="SpriteFrames" id=25]
 animations = [ {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 8 ), SubResource( 8 ) ],
 "loop": false,
 "name": "death",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
@@ -124,11 +129,6 @@ animations = [ {
 "loop": false,
 "name": "takehit",
 "speed": 5.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
-"loop": false,
-"name": "attack",
-"speed": 10.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=26]
@@ -156,6 +156,7 @@ MAX_SPEED = 200
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 25 )
 animation = "flight"
+frame = 7
 speed_scale = 2.0
 playing = true
 

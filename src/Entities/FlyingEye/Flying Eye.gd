@@ -105,7 +105,7 @@ func _on_Hitbox_area_entered(_area):
 	velocity = Vector2.ZERO
 	state = States.ATTACK
 
-func _on_Stats_no_health():
+func _on_Stats_no_health(_value):
 	velocity = Vector2.ZERO
 	state = States.DEATH
 

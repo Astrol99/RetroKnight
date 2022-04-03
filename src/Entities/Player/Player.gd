@@ -30,7 +30,7 @@ var roll_vector : Vector2 = Vector2.RIGHT
 
 func _ready():
 	stats.connect("no_health", self, "_on_Stats_no_health")
-	stats.connect("health_decreased", self, "on_Stats_health_decrease")
+	stats.connect("health_decreased", self, "_on_Stats_health_decrease")
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
 
@@ -102,10 +102,10 @@ func _on_Hurtbox_area_entered(area):
 	_hurtbox.start_invincibility(0.6)
 	stats.health -= area.damage
 
-func on_Stats_health_decrease():
+func _on_Stats_health_decrease(_value):
 	state = States.HIT
 
-func _on_Stats_no_health():
+func _on_Stats_no_health(_value):
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
