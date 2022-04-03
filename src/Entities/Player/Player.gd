@@ -114,6 +114,7 @@ func _on_Stats_health_decrease(_value):
 	state = States.HIT
 
 func _on_Stats_no_health(_value):
+	_hurtbox.get_child(0).set_deferred("disabled", true)
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
