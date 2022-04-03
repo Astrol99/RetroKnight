@@ -102,7 +102,7 @@ func _on_Hurtbox_area_entered(area):
 	_stats.health -= area.damage
 	_hurtbox.start_invincibility(0.4)
 
-func _on_Hitbox_area_entered(_area):
+func _on_HitboxRange_area_entered(_area):
 	velocity = Vector2.ZERO
 	state = States.ATTACK
 
@@ -111,10 +111,10 @@ func _on_Stats_no_health(_value):
 	state = States.DEATH
 
 func _on_AnimationPlayer_animation_finished(anim_name):
-		match anim_name:
-			"attack":
-				state = States.IDLE
-			"takehit":
-				state = States.IDLE
-			"death":
-				queue_free()
+	match anim_name:
+		"attack":
+			state = States.IDLE
+		"takehit":
+			state = States.IDLE
+		"death":
+			queue_free()

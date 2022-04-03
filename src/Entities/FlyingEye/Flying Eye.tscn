@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/sprites/Monsters_Creatures_Fantasy/Flying eye/Attack.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/Monsters_Creatures_Fantasy/Flying eye/Take Hit.png" type="Texture" id=2]
@@ -50,6 +50,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=33]
@@ -180,13 +192,17 @@ height = 12.0
 [sub_resource type="CircleShape2D" id=27]
 radius = 15.0
 
+[sub_resource type="CapsuleShape2D" id=36]
+height = 12.0
+
+[sub_resource type="CircleShape2D" id=31]
+radius = 17.0
+
 [sub_resource type="CircleShape2D" id=28]
 radius = 160.0
 
-[sub_resource type="CircleShape2D" id=31]
-
 [sub_resource type="CircleShape2D" id=30]
-radius = 13.0
+radius = 7.0
 
 [node name="Flying Eye" type="KinematicBody2D"]
 collision_layer = 16
@@ -217,37 +233,53 @@ modulate = Color( 0, 1, 0.27451, 1 )
 position = Vector2( 4, 1 )
 shape = SubResource( 27 )
 
-[node name="Stats" parent="." instance=ExtResource( 7 )]
-max_health = 2
-
-[node name="PlayerDetectionZone" parent="." instance=ExtResource( 8 )]
-
-[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-modulate = Color( 1, 1, 1, 0.329412 )
-shape = SubResource( 28 )
-
 [node name="Hitbox" parent="." instance=ExtResource( 9 )]
 collision_layer = 16
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 5, 6 )
+rotation = 1.5708
+shape = SubResource( 36 )
+disabled = true
+
+[node name="HitboxRange" parent="." instance=ExtResource( 9 )]
+collision_layer = 16
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" parent="HitboxRange" index="0"]
+modulate = Color( 0.721569, 0.0705882, 0.619608, 1 )
+position = Vector2( 3, 0 )
 shape = SubResource( 31 )
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 8 )]
+monitorable = false
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+modulate = Color( 1, 1, 1, 0.329412 )
+shape = SubResource( 28 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 10 )]
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-modulate = Color( 1, 0, 0, 1 )
-position = Vector2( 0, 5 )
+modulate = Color( 0.827451, 1, 0, 1 )
+position = Vector2( 6, 0 )
 shape = SubResource( 30 )
 
 [node name="WanderController" parent="." instance=ExtResource( 11 )]
 
+[node name="Stats" parent="." instance=ExtResource( 7 )]
+max_health = 2
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="area_entered" from="HitboxRange" to="." method="_on_HitboxRange_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 
 [editable path="Hurtbox"]
-[editable path="PlayerDetectionZone"]
 [editable path="Hitbox"]
+[editable path="HitboxRange"]
+[editable path="PlayerDetectionZone"]
 [editable path="SoftCollision"]
