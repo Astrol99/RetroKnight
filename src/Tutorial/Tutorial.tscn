@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background3.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background2.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/UI/DeathScreen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Entities/Goblin/Goblin.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Entities/Mushroom/Mushroom.tscn" type="PackedScene" id=11]
+[ext_resource path="res://src/Entities/Skeleton/Skeleton.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 32, 0, 32 )
@@ -862,8 +863,11 @@ position = Vector2( 841, 256 )
 [node name="Goblin" parent="." instance=ExtResource( 10 )]
 position = Vector2( 141, 324 )
 
-[node name="Mushroom" parent="." instance=ExtResource( 11 )]
+[node name="Skeleton" parent="." instance=ExtResource( 12 )]
 position = Vector2( 557, 320 )
+
+[node name="Mushroom" parent="." instance=ExtResource( 11 )]
+position = Vector2( 914, 315 )
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 6 )]
 
