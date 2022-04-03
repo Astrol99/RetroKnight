@@ -24,6 +24,7 @@ enum States {
 	HIT,
 	DEATH
 }
+
 export var state = States.MOVE
 
 var velocity : Vector2 = Vector2.ZERO
@@ -60,7 +61,7 @@ func _physics_process(delta):
 			
 		States.DEATH:
 			_animation_state.travel("death")
-	
+
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -98,13 +99,18 @@ func move_state(delta):
 		# Roll
 		if Input.is_action_just_pressed("roll"):
 			state = States.ROLL
-			
+		
 		# ATTACK1
 		if Input.is_action_just_pressed("player_attack"):
 			velocity = Vector2.ZERO
 			state = States.ATTACK1
 	else:
-		_animation_state.travel("fall")
+		# ATTACK1
+		if Input.is_action_just_pressed("player_attack"):
+			velocity = Vector2.DOWN * JUMP_FORCE * 2
+			state = States.ATTACK1
+		else: 
+			_animation_state.travel("fall")
 
 func _on_Hurtbox_area_entered(area):
 	velocity = Vector2.ZERO
@@ -115,7 +121,8 @@ func _on_Stats_health_decrease(_value):
 	state = States.HIT
 
 func _on_Stats_no_health(_value):
-	_hurtbox.get_child(0).set_deferred("disabled", true)
+	_hurtbox.get_node("CollisionShape2D").set_deferred("disabled", true)
+	_sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 	velocity = Vector2.ZERO
 	state = States.DEATH
 
