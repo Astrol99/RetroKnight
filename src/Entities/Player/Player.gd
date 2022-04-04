@@ -14,7 +14,7 @@ export(float) var ACCELERATION : float = 500.0
 export(float) var MAX_SPEED : float = 150.0
 export(float) var FRICTION : float = 0.25
 export(float) var GRAVITY : float = 400.0
-export(float) var JUMP_FORCE : float = 200.0
+export(float) var JUMP_FORCE : float = 225.0
 export(float) var ROLL_SPEED : float = 100.0
 export(float) var CAMERA_SHAKE : float = 1.0
 
@@ -45,6 +45,7 @@ func _physics_process(delta):
 		States.ATTACK2:
 			_animation_state.travel("attack2")
 			
+			_camera.set_offset(_camera_offset_default)
 			if _sword_hitbox.get_overlapping_areas():
 				_camera.set_offset(_camera.offset + Vector2( \
 					rand_range(-1.0, 1.0) * CAMERA_SHAKE, \
@@ -53,15 +54,17 @@ func _physics_process(delta):
 			
 		States.ATTACK1:
 			_animation_state.travel("attack1")
+				
+			_camera.set_offset(_camera_offset_default)
+			if _sword_hitbox.get_overlapping_areas():
+				_camera.set_offset(_camera.offset + Vector2( \
+					rand_range(-1.0, 1.0) * CAMERA_SHAKE/2, \
+					rand_range(-1.0, 1.0) * CAMERA_SHAKE/2 \
+				))
+			
 			if Input.is_action_just_pressed("player_attack"):
 				_animation_state.travel("attack2")
 				state = States.ATTACK2
-			
-			if _sword_hitbox.get_overlapping_areas():
-				_camera.set_offset(_camera.offset + Vector2( \
-					rand_range(-1.0, 1.0) * CAMERA_SHAKE, \
-					rand_range(-1.0, 1.0) * CAMERA_SHAKE \
-				))
 			
 		States.MOVE:
 			move_state(delta)
@@ -73,6 +76,8 @@ func _physics_process(delta):
 			
 		States.HIT:
 			_animation_state.travel("hit")
+			
+			_camera.set_offset(_camera_offset_default)
 			_camera.set_offset(_camera.offset + Vector2( \
 				rand_range(-1.0, 1.0) * CAMERA_SHAKE, \
 				rand_range(-1.0, 1.0) * CAMERA_SHAKE \
@@ -134,7 +139,6 @@ func move_state(delta):
 func _on_Hurtbox_area_entered(area):
 	velocity = Vector2.ZERO
 	_hurtbox.start_invincibility(0.6)
-	_camera.set_offset(_camera_offset_default)
 	stats.health -= area.damage
 	
 func _on_Stats_health_decrease(_value):

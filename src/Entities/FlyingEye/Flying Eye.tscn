@@ -205,7 +205,7 @@ height = 12.0
 radius = 15.0
 
 [sub_resource type="CapsuleShape2D" id=36]
-height = 12.0
+height = 14.0
 
 [sub_resource type="CircleShape2D" id=31]
 radius = 17.0
@@ -225,6 +225,7 @@ MAX_SPEED = 200
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 hframes = 8
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 32 )
