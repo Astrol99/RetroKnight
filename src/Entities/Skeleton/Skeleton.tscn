@@ -68,7 +68,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=61]
 resource_name = "death"
-length = 0.4
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -104,6 +104,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=62]
@@ -276,13 +288,13 @@ height = 30.0
 
 [sub_resource type="CapsuleShape2D" id=65]
 radius = 9.0
-height = 64.0
+height = 36.0
 
 [sub_resource type="CapsuleShape2D" id=66]
 height = 74.0
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 85.0235
+radius = 179.025
 
 [sub_resource type="CircleShape2D" id=30]
 radius = 4.0
@@ -292,9 +304,8 @@ collision_layer = 16
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 13 )
+texture = ExtResource( 6 )
 hframes = 4
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 60 )
