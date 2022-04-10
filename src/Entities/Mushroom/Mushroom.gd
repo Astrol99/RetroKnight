@@ -118,6 +118,11 @@ func _on_HitboxRange_area_entered(_area):
 
 func _on_Stats_no_health(_value):
 	velocity = Vector2.ZERO
+	
+	for child in get_children():
+		if child is Area2D:
+			child.get_child(0).set_deferred("disabled", true)
+	
 	state = States.DEATH
 
 func _on_AnimationPlayer_animation_finished(anim_name):
