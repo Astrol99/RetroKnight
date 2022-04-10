@@ -137,6 +137,7 @@ func move_state(delta):
 			_animation_state.travel("fall")
 
 func _on_Hurtbox_area_entered(area):
+	_sword_hitbox.get_node("CollisionShape2D").set_deferred("disabled", true)
 	velocity = Vector2.ZERO
 	_hurtbox.start_invincibility(0.6)
 	stats.health -= area.damage

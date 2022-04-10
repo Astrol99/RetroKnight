@@ -590,27 +590,27 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=53]
 states/attack1/node = SubResource( 61 )
-states/attack1/position = Vector2( -504, 53 )
+states/attack1/position = Vector2( -286, 82 )
 states/attack2/node = SubResource( 92 )
-states/attack2/position = Vector2( -325, -246 )
+states/attack2/position = Vector2( -171, -104 )
 states/death/node = SubResource( 84 )
-states/death/position = Vector2( 115, 629 )
+states/death/position = Vector2( 67, 643 )
 states/fall/node = SubResource( 55 )
 states/fall/position = Vector2( 404, 259 )
 states/hit/node = SubResource( 74 )
-states/hit/position = Vector2( -389, 526 )
+states/hit/position = Vector2( -230, 461 )
 states/idle/node = SubResource( 49 )
-states/idle/position = Vector2( 251, 76 )
+states/idle/position = Vector2( 157, 82 )
 states/jump/node = SubResource( 56 )
-states/jump/position = Vector2( 978, 475 )
+states/jump/position = Vector2( 555, 559 )
 states/roll/node = SubResource( 67 )
-states/roll/position = Vector2( 22, -326 )
+states/roll/position = Vector2( 16, -171 )
 states/run/node = SubResource( 50 )
-states/run/position = Vector2( 848, -75 )
+states/run/position = Vector2( 531, -24 )
 transitions = [ "idle", "run", SubResource( 51 ), "run", "idle", SubResource( 52 ), "run", "jump", SubResource( 57 ), "idle", "jump", SubResource( 58 ), "jump", "fall", SubResource( 59 ), "fall", "idle", SubResource( 60 ), "attack1", "idle", SubResource( 62 ), "idle", "attack1", SubResource( 63 ), "idle", "roll", SubResource( 68 ), "roll", "idle", SubResource( 69 ), "hit", "idle", SubResource( 75 ), "jump", "hit", SubResource( 76 ), "run", "hit", SubResource( 77 ), "roll", "hit", SubResource( 78 ), "idle", "hit", SubResource( 79 ), "attack1", "hit", SubResource( 80 ), "hit", "death", SubResource( 85 ), "attack1", "death", SubResource( 86 ), "roll", "death", SubResource( 87 ), "idle", "death", SubResource( 88 ), "run", "death", SubResource( 89 ), "jump", "death", SubResource( 90 ), "fall", "death", SubResource( 91 ), "attack1", "attack2", SubResource( 93 ), "attack2", "idle", SubResource( 94 ) ]
 start_node = "idle"
 end_node = "death"
-graph_offset = Vector2( -922, -441 )
+graph_offset = Vector2( -874, -527 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=54]
 
