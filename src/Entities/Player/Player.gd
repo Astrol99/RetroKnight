@@ -85,6 +85,7 @@ func _physics_process(delta):
 			
 		States.DEATH:
 			_animation_state.travel("death")
+			velocity = Vector2.ZERO
 
 	velocity.y += GRAVITY * delta
 	velocity = move_and_slide(velocity, Vector2.UP)

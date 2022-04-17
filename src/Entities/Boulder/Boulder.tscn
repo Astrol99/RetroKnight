@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/mainlev_build.png" type="Texture" id=1]
+[ext_resource path="res://src/Entities/Collisions/Hitbox.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 31.0644
+
+[node name="Boulder" type="RigidBody2D"]
+collision_layer = 16
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 16, 15 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 80, 96, 32, 30 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( -16, -15 )
+rotation = 3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 80, 96, 32, 30 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( 15, -16 )
+rotation = -1.5708
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 80, 96, 32, 30 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( -16, 15 )
+texture = ExtResource( 1 )
+flip_h = true
+region_enabled = true
+region_rect = Rect2( 80, 96, 32, 30 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+collision_layer = 16
+collision_mask = 4
+damage = 999
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+modulate = Color( 0.956863, 0, 0, 1 )
+shape = SubResource( 2 )
+
+[editable path="Hitbox"]
