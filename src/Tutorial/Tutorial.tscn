@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=2]
+[gd_scene load_steps=205 format=2]
 
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background3.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/background2.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Entities/Player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/UI/DeathScreen.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Entities/Mushroom/Mushroom.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/Entities/Boulder/Boulder.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=16]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -4977,11 +4978,15 @@ scale = Vector2( 2, 2 )
 position = Vector2( 1544, 80 )
 scale = Vector2( 2, 2 )
 
+[node name="Boulder" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1793, -518 )
+mass = 65535.0
+
 [node name="Mushroom" parent="." instance=ExtResource( 10 )]
 position = Vector2( 3383, -92 )
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 94, 327 )
+position = Vector2( 1671, -197 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -4992,7 +4997,7 @@ remote_path = NodePath("../../Camera2D")
 layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 94, 327 )
+position = Vector2( 1671, -197 )
 offset = Vector2( 0, -75 )
 current = true
 process_mode = 0
