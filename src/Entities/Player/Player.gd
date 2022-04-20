@@ -39,6 +39,7 @@ func _ready():
 	_animation_tree.active = true
 	_sword_hitbox.knockback_vector = roll_vector
 	stats._ready()
+	print("YOOOOOOOO I JUST CHANGED SOME CRAZY CODE")
 
 func _physics_process(delta):
 	match state:
