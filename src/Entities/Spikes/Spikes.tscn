@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Entities/Collisions/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/PixelFantasy_Caves_1.0/mainlev_build.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12, 8 )
+
+[node name="Spikes" type="Sprite"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 749, 288, 24, 16 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 16
+collision_mask = 4
+damage = 99999
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 1 )
+
+[editable path="Hitbox"]
