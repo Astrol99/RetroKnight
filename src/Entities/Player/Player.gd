@@ -10,12 +10,12 @@ onready var _camera = get_parent().get_node("Camera2D")
 onready var _camera_offset_default = _camera.offset
 var stats = PlayerStats
 
-export(float) var ACCELERATION : float = 500.0
+export(float) var ACCELERATION : float = 525.0
 export(float) var MAX_SPEED : float = 150.0
-export(float) var FRICTION : float = 0.25
+export(float) var FRICTION : float = 0.3
 export(float) var GRAVITY : float = 400.0
-export(float) var JUMP_FORCE : float = 225.0
-export(float) var ROLL_SPEED : float = 100.0
+export(float) var JUMP_FORCE : float = 230.0
+export(float) var ROLL_SPEED : float = 110.0
 export(float) var CAMERA_SHAKE : float = 1.0
 
 # States
