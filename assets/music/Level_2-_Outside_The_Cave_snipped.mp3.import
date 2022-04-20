@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Level_2-_Outside_The_Cave_snipped.mp3-25e28fa3fd8c20b252e7b6dfc25750ca.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Level_2-_Outside_The_Cave_snipped.mp3"
+dest_files=[ "res://.import/Level_2-_Outside_The_Cave_snipped.mp3-25e28fa3fd8c20b252e7b6dfc25750ca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
