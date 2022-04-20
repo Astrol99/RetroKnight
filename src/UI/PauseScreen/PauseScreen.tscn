@@ -1,32 +1,18 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/themes/PixelTheme.tres" type="Theme" id=1]
-[ext_resource path="res://src/UI/DeathScreen.gd" type="Script" id=2]
+[ext_resource path="res://src/UI/PauseScreen/PauseScreen.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/MinimalPixel v2.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.6, 0.6, 0.6, 0 )
-shadow_size = 16
-
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Quit:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=3]
-resource_name = "show_death"
+resource_name = "show_pause"
 length = 2.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("YOU DIED:modulate")
+tracks/0/path = NodePath("PAUSED:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -38,7 +24,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Try Again:modulate")
+tracks/1/path = NodePath("Reload:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -62,7 +48,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Try Again:disabled")
+tracks/3/path = NodePath("Reload:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -86,50 +72,50 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
-[node name="DeathScreen" type="CanvasLayer"]
+[node name="PauseScreen" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="YOU DIED" type="Label" parent="."]
+[node name="PAUSED" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -7.0
-margin_bottom = 7.0
+margin_bottom = 9.0
 theme = ExtResource( 1 )
-custom_colors/font_color = Color( 0.890196, 0.152941, 0.152941, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_styles/normal = SubResource( 1 )
-text = "YOU DIED"
+custom_fonts/font = SubResource( 5 )
+text = "PAUSED"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Try Again" type="Button" parent="."]
-margin_left = 204.0
-margin_top = 234.0
-margin_right = 284.0
-margin_bottom = 268.0
+[node name="Reload" type="Button" parent="."]
+margin_left = 280.0
+margin_top = 208.0
+margin_right = 360.0
+margin_bottom = 242.0
 focus_neighbour_left = NodePath("../Quit")
 focus_neighbour_right = NodePath("../Quit")
 theme = ExtResource( 1 )
-text = "Try Again"
+text = "Reload"
 
 [node name="Quit" type="Button" parent="."]
-margin_left = 384.0
-margin_top = 236.0
-margin_right = 424.0
-margin_bottom = 270.0
-focus_neighbour_left = NodePath("../Try Again")
-focus_neighbour_right = NodePath("../Try Again")
+margin_left = 300.0
+margin_top = 240.0
+margin_right = 340.0
+margin_bottom = 274.0
+focus_neighbour_left = NodePath("../Reload")
+focus_neighbour_right = NodePath("../Reload")
 theme = ExtResource( 1 )
 text = "Quit"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 4 )
-anims/show_death = SubResource( 3 )
+anims/show_pause = SubResource( 3 )
 
-[connection signal="pressed" from="Try Again" to="." method="_on_Try_Again_pressed"]
+[connection signal="pressed" from="Reload" to="." method="_on_Try_Again_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
