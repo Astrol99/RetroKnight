@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Tutorial_Boss.mp3-ae962961de5873f77eacbe03e735b1ea.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Tutorial_Boss.mp3"
+dest_files=[ "res://.import/Tutorial_Boss.mp3-ae962961de5873f77eacbe03e735b1ea.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
