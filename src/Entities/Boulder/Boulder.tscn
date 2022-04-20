@@ -11,6 +11,8 @@ radius = 31.0644
 
 [node name="Boulder" type="RigidBody2D"]
 collision_layer = 16
+mass = 65535.0
+gravity_scale = 5.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 16, 15 )
