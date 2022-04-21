@@ -4930,22 +4930,6 @@ region = Rect2( 0, 0, 48, 32 )
 atlas = ExtResource( 14 )
 region = Rect2( 48, 0, 48, 32 )
 
-[sub_resource type="AtlasTexture" id=221]
-atlas = ExtResource( 12 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=222]
-atlas = ExtResource( 12 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=229]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=230]
-atlas = ExtResource( 15 )
-region = Rect2( 64, 0, 64, 32 )
-
 [sub_resource type="AtlasTexture" id=223]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
@@ -4962,21 +4946,27 @@ region = Rect2( 0, 0, 32, 32 )
 atlas = ExtResource( 13 )
 region = Rect2( 32, 0, 32, 32 )
 
+[sub_resource type="AtlasTexture" id=221]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=222]
+atlas = ExtResource( 12 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=229]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 64, 32 )
+
+[sub_resource type="AtlasTexture" id=230]
+atlas = ExtResource( 15 )
+region = Rect2( 64, 0, 64, 32 )
+
 [sub_resource type="SpriteFrames" id=220]
 animations = [ {
 "frames": [ SubResource( 227 ), SubResource( 228 ) ],
 "loop": true,
 "name": "Shift Key",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 221 ), SubResource( 222 ) ],
-"loop": true,
-"name": "W Key",
-"speed": 2.0
-}, {
-"frames": [ SubResource( 229 ), SubResource( 230 ) ],
-"loop": true,
-"name": "Spacebar",
 "speed": 2.0
 }, {
 "frames": [ SubResource( 223 ), SubResource( 224 ) ],
@@ -4988,6 +4978,16 @@ animations = [ {
 "loop": true,
 "name": "D Key",
 "speed": 2.0
+}, {
+"frames": [ SubResource( 221 ), SubResource( 222 ) ],
+"loop": true,
+"name": "W Key",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 229 ), SubResource( 230 ) ],
+"loop": true,
+"name": "Spacebar",
+"speed": 2.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=232]
@@ -4997,6 +4997,7 @@ extents = Vector2( 10, 61 )
 extents = Vector2( 8, 16 )
 
 [node name="Tutorial" type="Node2D"]
+position = Vector2( 1, 0 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
@@ -5053,7 +5054,6 @@ position = Vector2( 76, 284 )
 scale = Vector2( 0.937499, 0.937499 )
 frames = SubResource( 220 )
 animation = "A Key"
-frame = 1
 playing = true
 
 [node name="W Key" type="AnimatedSprite" parent="Key Sprites"]
@@ -5061,7 +5061,6 @@ position = Vector2( 104, 259 )
 scale = Vector2( 0.937499, 0.937499 )
 frames = SubResource( 220 )
 animation = "W Key"
-frame = 1
 playing = true
 
 [node name="D Key" type="AnimatedSprite" parent="Key Sprites"]
@@ -5069,6 +5068,7 @@ position = Vector2( 132, 284 )
 scale = Vector2( 0.937499, 0.937499 )
 frames = SubResource( 220 )
 animation = "D Key"
+frame = 1
 playing = true
 
 [node name="Shift Key" type="AnimatedSprite" parent="Key Sprites"]
@@ -5076,7 +5076,6 @@ position = Vector2( 1649, -245 )
 scale = Vector2( 0.937499, 0.937499 )
 frames = SubResource( 220 )
 animation = "Shift Key"
-frame = 1
 playing = true
 
 [node name="Spacebar" type="AnimatedSprite" parent="Key Sprites"]
@@ -5084,6 +5083,7 @@ position = Vector2( 3013, -132 )
 scale = Vector2( 0.8125, 0.8125 )
 frames = SubResource( 220 )
 animation = "Spacebar"
+frame = 1
 playing = true
 
 [node name="Spikes" type="Node2D" parent="."]
