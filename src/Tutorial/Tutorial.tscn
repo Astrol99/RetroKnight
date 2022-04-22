@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/sprites/Gerald's Keys/Keys/Space-Key.png" type="Texture" id=15]
 [ext_resource path="res://assets/music/Tutorial_Start.mp3" type="AudioStream" id=16]
 [ext_resource path="res://src/Tutorial/BossMusicStarter.gd" type="Script" id=17]
-[ext_resource path="res://src/Tutorial/Barrier.gd" type="Script" id=18]
+[ext_resource path="res://src/Entities/Barrier/Barrier.tscn" type="PackedScene" id=18]
 [ext_resource path="res://src/Entities/Door/Door.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=16]
@@ -4924,14 +4924,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
 220/shapes = [  ]
 220/z_index = 0
 
-[sub_resource type="AtlasTexture" id=227]
-atlas = ExtResource( 14 )
-region = Rect2( 0, 0, 48, 32 )
-
-[sub_resource type="AtlasTexture" id=228]
-atlas = ExtResource( 14 )
-region = Rect2( 48, 0, 48, 32 )
-
 [sub_resource type="AtlasTexture" id=223]
 atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 32, 32 )
@@ -4964,13 +4956,16 @@ region = Rect2( 0, 0, 64, 32 )
 atlas = ExtResource( 15 )
 region = Rect2( 64, 0, 64, 32 )
 
+[sub_resource type="AtlasTexture" id=227]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 48, 32 )
+
+[sub_resource type="AtlasTexture" id=228]
+atlas = ExtResource( 14 )
+region = Rect2( 48, 0, 48, 32 )
+
 [sub_resource type="SpriteFrames" id=220]
 animations = [ {
-"frames": [ SubResource( 227 ), SubResource( 228 ) ],
-"loop": true,
-"name": "Shift Key",
-"speed": 2.0
-}, {
 "frames": [ SubResource( 223 ), SubResource( 224 ) ],
 "loop": true,
 "name": "A Key",
@@ -4989,6 +4984,11 @@ animations = [ {
 "frames": [ SubResource( 229 ), SubResource( 230 ) ],
 "loop": true,
 "name": "Spacebar",
+"speed": 2.0
+}, {
+"frames": [ SubResource( 227 ), SubResource( 228 ) ],
+"loop": true,
+"name": "Shift Key",
 "speed": 2.0
 } ]
 
@@ -5080,7 +5080,6 @@ position = Vector2( 1649, -245 )
 scale = Vector2( 0.937499, 0.937499 )
 frames = SubResource( 220 )
 animation = "Shift Key"
-frame = 1
 playing = true
 
 [node name="Spacebar" type="AnimatedSprite" parent="Key Sprites"]
@@ -5088,6 +5087,7 @@ position = Vector2( 3013, -132 )
 scale = Vector2( 0.8125, 0.8125 )
 frames = SubResource( 220 )
 animation = "Spacebar"
+frame = 1
 playing = true
 
 [node name="Spikes" type="Node2D" parent="."]
@@ -5125,22 +5125,19 @@ script = ExtResource( 17 )
 position = Vector2( -152, 120 )
 shape = SubResource( 231 )
 
-[node name="Barrier" type="StaticBody2D" parent="."]
+[node name="Barrier" parent="." instance=ExtResource( 18 )]
 position = Vector2( 3551, -136 )
 scale = Vector2( 1.5, 1.5 )
-script = ExtResource( 18 )
 
-[node name="Sprite" type="Sprite" parent="Barrier"]
+[node name="Sprite" parent="Barrier" index="0"]
 texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 880, 400, 32, 96 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+[node name="CollisionShape2D" parent="Barrier" index="1"]
 shape = SubResource( 233 )
 
 [node name="Door" parent="." instance=ExtResource( 19 )]
 position = Vector2( 3679, -96 )
-location = "res://src/plains/plains.tscn"
+location = "res://src/AdonisPlains/AdonisPlains.tscn"
 
 [node name="Mushroom" parent="." instance=ExtResource( 10 )]
 position = Vector2( 3383, -92 )
@@ -5163,4 +5160,6 @@ editor_draw_drag_margin = true
 
 [connection signal="body_entered" from="BoulderSpawner" to="BoulderSpawner" method="_on_BoulderSpawner_body_entered"]
 [connection signal="body_entered" from="BossMusicStarter" to="BossMusicStarter" method="_on_BossMusicStarter_body_entered"]
-[connection signal="dead" from="Mushroom" to="Barrier" method="_on_Mushroom_dead"]
+[connection signal="dead" from="Mushroom" to="Barrier" method="on_dead"]
+
+[editable path="Barrier"]

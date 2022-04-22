@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal death
+
 onready var _stats = $Stats
 onready var _sprite = $Sprite
 onready var _animation_player = $AnimationPlayer
@@ -149,4 +151,5 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		"shield":
 			state = States.IDLE
 		"death":
+			emit_signal("death")
 			queue_free()

@@ -1,4 +1,4 @@
 extends StaticBody2D
 
-func _on_Mushroom_dead():
+func on_dead():
 	queue_free()
