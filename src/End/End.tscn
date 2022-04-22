@@ -7,6 +7,6 @@
 script = ExtResource( 2 )
 
 [node name="Cutscene" parent="." instance=ExtResource( 1 )]
-text = "To be continued..."
+text = "The goblins are slain, but the RetroKnight still feel something off about the atmosphere. He enters the Forest of Zephyr. To be continued..."
 
 [connection signal="tree_exited" from="Cutscene" to="." method="_on_Cutscene_tree_exited"]
